@@ -59,7 +59,7 @@ function generateHtml(data) {
 
   return `
     <div style="font-family:Arial; max-width:700px; margin:auto;">
-      <h2 style="text-align:center; color:#007bff;">🔧 Formulaire Création Référence</h2>
+      <h2 style="text-align:center; color:#007bff;">🔧 Formulaire Création Référence PL</h2>
       <table style="width:100%; border-collapse:collapse; margin-top:20px;">
         ${rows}
       </table>
@@ -76,9 +76,9 @@ app.post("/submit-form", upload.array("fichiers[]"), async (req, res) => {
   }));
 
   const mailOptions = {
-    from: `"Formulaire création" <${process.env.EMAIL_USER}>`,
+    from: `"Formulaire création PL" <${process.env.EMAIL_USER}>`,
     to: process.env.DEST_EMAIL,
-    subject: "📨Demande de création référence",
+    subject: "📨Demande de création référence PL",
     html: generateHtml(formData),
     attachments
   };
