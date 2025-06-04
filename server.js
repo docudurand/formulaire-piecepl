@@ -51,17 +51,18 @@ const transporter = nodemailer.createTransport({
 
 function generateHtml(data) {
   const rows = Object.entries(FORM_FIELDS).map(([key, label]) => {
-   let value = data[key] || "";
+    let value = data[key] || "";
     if (key === "reference" || key === "commentaire") {
       value = br(value);
     }
     if (!value) value = "<em>(non renseigné)</em>";
-  return `
-    <tr>
-      <td style="padding:8px; border:1px solid #ccc; background:#f8f8f8; font-weight:bold;">${label}</td>
-      <td style="padding:8px; border:1px solid #ccc;">${data[key] || '<em>(non renseigné)</em>'}</td>
-    </tr>
-`;
+
+    return `
+      <tr>
+        <td style="padding:8px; border:1px solid #ccc; background:#f8f8f8; font-weight:bold;">${label}</td>
+        <td style="padding:8px; border:1px solid #ccc;">${value}</td>
+      </tr>
+    `;
   }).join("");
 
   return `
