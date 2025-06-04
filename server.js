@@ -9,12 +9,10 @@ const PORT = process.env.PORT || 3000;
 
 const FORM_FIELDS = {
   email: "Adresse e-mail",
-  marque: "Marque",
-  fournisseur: "Fournisseur de Réappro",
+  marque: "Nom de l'équipementier ou code fournisseur",
   reference: "Référence",
-  designation: "Désignation pièce (Si en Anglais)",
-  tarif: "Tarif",
-  remise: "Remise"
+  designation: "Désignation",
+  commentaire: "Commentaire"
 };
 
 app.use(cors({
