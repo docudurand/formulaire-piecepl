@@ -15,6 +15,8 @@ const FORM_FIELDS = {
   commentaire: "Commentaire"
 };
 
+const br = (str = "") => str.replace(/\r?\n/g, "<br>");
+
 app.use(cors({
   origin: (origin, cb) => cb(null, true),
   methods: ["GET", "POST", "OPTIONS"],
@@ -48,12 +50,19 @@ const transporter = nodemailer.createTransport({
 });
 
 function generateHtml(data) {
-  const rows = Object.entries(FORM_FIELDS).map(([key, label]) => `
+  const rows = Object.entries(FORM_FIELDS).map(([key, label]) => {
+   let value = data[key] || "";
+    if (key === "reference" || key === "commentaire") {
+      value = br(value);
+    }
+    if (!value) value = "<em>(non renseigné)</em>";
+  return `
     <tr>
       <td style="padding:8px; border:1px solid #ccc; background:#f8f8f8; font-weight:bold;">${label}</td>
       <td style="padding:8px; border:1px solid #ccc;">${data[key] || '<em>(non renseigné)</em>'}</td>
     </tr>
-  `).join("");
+`;
+  }).join("");
 
   return `
     <div style="font-family:Arial; max-width:700px; margin:auto;">
